@@ -21,7 +21,6 @@ class DatabaseSeeder extends Seeder
         $this->call(AnswerTableSeeder::class);
         $this->call(LearnedWordTableSeeder::class);
         $this->call(FollowersTableSeeder::class);
-        $this->call(LessonBaseSeeder::class);
         Model::reguard();
     }
 }
