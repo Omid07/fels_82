@@ -3,9 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Category;
+use App\Lesson;
+use App\Lessonbase;
+use App\Question;
+use App\User;
+use App\Answer;
+use DB;
+use App\UserLesson;
 
 class LessonsController extends Controller
 {
@@ -16,7 +23,7 @@ class LessonsController extends Controller
      */
     public function index()
     {
-        return view('lessons');
+        //
     }
 
     /**
@@ -37,7 +44,33 @@ class LessonsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (\Auth::check()) {
+            $selectedId = 0;
+            $alreadyLearnedId = 0;
+            $categoryId = $request->input('id');
+            $userId = \Auth::user()->id;
+            $lessons = Category::find($categoryId)->lessons;
+            foreach ($lessons as $index => $lesson) {
+                $userLessonRow = UserLesson::where('user_id', '=', $userId)->where('lesson_id', '=', $lesson->id)->first();
+                if (!$userLessonRow) {
+                    $selectedId = $lesson->id;
+                    break;
+                }
+                if ($userLessonRow->score == 0) {
+                    $selectedId = $lesson->id;
+                    break;
+                } else {
+                        $alreadyLearnedId = $lesson->id;
+                }
+            }
+            if ($selectedId == 0) {
+                $selectedId = $alreadyLearnedId + 1;
+            }
+            $questionCollection = Lessonbase::where('lesson_id', '=', $selectedId)->lists('question_id');
+            $questions = Question::whereIn('id', $questionCollection)->get();
+            $answers = Answer::whereIn('question_id', $questionCollection)->get();
+            return view('lessons', compact('selectedId', 'questions', 'answers'));
+        }
     }
 
     /**

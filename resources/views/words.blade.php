@@ -65,20 +65,44 @@
         </button>
     </div>
 </div>
-    @foreach ($words as $word)
-        <div class="row-fluid">
-            <div class="col-md-2">
-            </div>
-            <div class="col-md-5">
-                {{ $word->english_word }}
-            </div>
-            <div class="col-md-5">
+<div>
+    <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Words</th>
+                    <th>
+                    </th>
+                    <th>Meanings</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach ($words as $word)
+            <tr>
+                <td>{{ $word->english_word }}
+                </td>
+                <td>
+                    {!! Form::open(['route'=>['admins.destroy', $word->id], 'method' => 'DELETE']) !!}
+                        {!! Form::submit('Delete') !!}
+                    {!! Form:: close() !!}
+                </td>
                 @foreach ($meanings as $meaning)
                     @if ($word->id == $meaning->id)
-                        {{ $meaning->bengali_meaning }}
+                        <td>{{ $meaning->bengali_meaning }}</td>
                     @endif
                 @endforeach
-            </div>
-        </div>
-    @endforeach
+                <td>
+                {!! Form::open(['route'=>['admins.destroy', $meaning->id], 'method' => 'DELETE']) !!}
+                    {!! Form::submit('Delete') !!}
+                {!! Form:: close() !!}
+                </td>
+            </tr>
+                @endforeach
+            </tbody>
+    </table>
+    {!! Form::open(['url' => '#', 'method' => 'PUT']) !!}
+        {!! Form::submit('Add new word') !!}
+    {!! Form:: close() !!}
+
+</div>
 @endsection

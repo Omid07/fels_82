@@ -3,24 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Category;
-use App\Question;
+use App\Admin;
+use App\User;
+use Auth;
 
-class CategoriesController extends Controller
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+    // public function __construct(){
+    //     $this->middleware('admin');
+    // }
+
     public function index()
     {
-        $categories = Category::all();
-        $questions = Question::all();
-        return view('categories', compact('categories', 'questions'));
+        $users = User::all();
+        return view('admins', compact('users'));
     }
 
     /**
@@ -63,7 +66,8 @@ class CategoriesController extends Controller
      */
     public function edit($id)
     {
-        //
+         $user=User::findorFail($id);
+         return view('edit', compact('user'));
     }
 
     /**
@@ -75,7 +79,11 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+        $data= User::findorFail($id);
+        $data->update($input);
+        return redirect('admins');
+
     }
 
     /**
@@ -86,6 +94,9 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+        return redirect('admins');
+
     }
 }

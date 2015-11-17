@@ -6,10 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Category;
-use App\Question;
 
-class CategoriesController extends Controller
+class AdminCreateWords extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,9 +16,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        $questions = Question::all();
-        return view('categories', compact('categories', 'questions'));
+        //
     }
 
     /**
