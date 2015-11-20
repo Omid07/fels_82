@@ -21,7 +21,7 @@
                         {!! Form::open(['route'=>['admins.destroy', $category->id], 'method' => 'DELETE']) !!}
                             {!! Form::submit('Delete') !!}
                         {!! Form:: close() !!}
-                        {!! Form::open(['route' =>['admins.edit', $category->id], 'method' => 'GET']) !!}
+                        {!! Form::open(['route' =>['admins_category.edit', $category->id], 'method' => 'GET']) !!}
                             {!! Form::submit('Edit') !!}
                         {!! Form:: close() !!}
                     </td>

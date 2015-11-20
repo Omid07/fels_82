@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
+    protected $fillable = array('id', 'category_name', );
     public function questions()
     {
         return $this->hasMany('App\Question');

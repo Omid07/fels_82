@@ -82,8 +82,8 @@
                 <td>{{ $word->english_word }}
                 </td>
                 <td>
-                    {!! Form::open(['route'=>['admins.destroy', $word->id], 'method' => 'DELETE']) !!}
-                        {!! Form::submit('Delete') !!}
+                    {!! Form::open(['route'=>['admins_question.edit', $word->id], 'method' => 'GET']) !!}
+                        {!! Form::submit('Edit') !!}
                     {!! Form:: close() !!}
                 </td>
                 @foreach ($meanings as $meaning)
@@ -92,15 +92,15 @@
                     @endif
                 @endforeach
                 <td>
-                {!! Form::open(['route'=>['admins.destroy', $meaning->id], 'method' => 'DELETE']) !!}
-                    {!! Form::submit('Delete') !!}
+                {!! Form::open(['route'=>['admins_answer.edit', $meaning->id], 'method' => 'GET']) !!}
+                    {!! Form::submit('Edit') !!}
                 {!! Form:: close() !!}
                 </td>
             </tr>
                 @endforeach
             </tbody>
     </table>
-    {!! Form::open(['url' => '#', 'method' => 'PUT']) !!}
+    {!! Form::open(['route'=>['admins_word_create.create'], 'method' => 'GET']) !!}
         {!! Form::submit('Add new word') !!}
     {!! Form:: close() !!}
 

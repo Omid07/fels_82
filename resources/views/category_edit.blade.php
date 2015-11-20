@@ -11,18 +11,14 @@
 <body>
 <div class="container">
   <h2>Admin edit field</h2>
-  <p>User information edit:</p>
-   {!! Form::open(['route'=>['admins.update', $user->id], 'class'=>'form-horizen', 'method'=>'PUT']) !!}
+  <p>Category information edit:</p>
+   {!! Form::open(['route'=>['admins_category.update', $cat->id], 'class'=>'form-horizen', 'method'=>'PUT']) !!}
     <div class="form-group">
-        {!! Form::label('name', 'Name', array('class' => 'col-xm-3 control-label')) !!}
-        {!! Form::text('name', $value = $user->name, $attributes = array('class'=>'form-control','id'=>'name')) !!}
-    </div>
-    <div class="form-group">
-        {!! Form::label('email', 'Email', array('class' => 'col-xm-3 control-label')) !!}
-        {!! Form::text('email', $value = $user->email, $attributes = array('class'=>'form-control','id'=>'email')) !!}
+        {!! Form::label('category_name', 'Category Name', array('class' => 'col-xm-3 control-label')) !!}
+        {!! Form::text('category_name', $value = $cat->category_name, $attributes = array('class'=>'form-control','id'=>'category_name')) !!}
     </div>
     {!! Form::submit('Submit') !!}
     {!! Form::close() !!}
-</div>
+    </div>
 </body>
 </html>

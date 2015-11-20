@@ -28,6 +28,10 @@ Route::resource('lessons', 'LessonsController');
 Route::resource('profiles', 'ProfilesController');
 Route::resource('admins', 'AdminController');
 Route::resource('admins_create', 'AdminCreateWords');
+Route::resource('admins_category', 'AdminCategoryEditController');
+Route::resource('admins_question', 'AdminQuestionEditController');
+Route::resource('admins_answer', 'AdminAnswerEditController');
+Route::resource('admins_word_create', 'AdminWordCreateController');
 Route::get('home', function () {
     return view('home');
 });
