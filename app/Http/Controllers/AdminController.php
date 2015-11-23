@@ -20,9 +20,18 @@ class AdminController extends Controller
     //     $this->middleware('admin');
     // }
 
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
+
+        // $users = User::all();
+        $users = User::orderBy('name');
+        $name=$request->input('name');
+        if(!empty($name)){
+            $users->Where('name', '=', $name);
+        }else
+        {
+        $users=User::all();
+        }
         return view('admins', compact('users'));
     }
 

@@ -40,21 +40,22 @@ class AdminWordCreateController extends Controller
     public function store(Request $request)
     {
         $english_word = $request->input('english_word');
-         echo $english_word;
+         // echo $english_word;
          $id = $request->input('id');
-         echo $id;
+         // echo $id;
         $qus = new Question;
-        // $qus->category_id = $id;
-        // $qus->english_word = $english_word;
-        // $qus->save();
-          $bengali_meaning = $request->input('bengali_meaning');
-         echo $bengali_meaning;
-         echo count($qus);
-        // $ans = new Answer;
-        // $ans->question_id = $id;
-        // $ans->is_correct = true;
-        // $ans->bengali_meaning = $bengali_meaning;
-        // $ans->save();
+        $questions = Question::all();
+        $qus->category_id = $id;
+        $qus->english_word = $english_word;
+        $qus->save();
+        $bengali_meaning = $request->input('bengali_meaning');
+         // echo $bengali_meaning;
+         // echo count($questions);
+        $ans = new Answer;
+        $ans->question_id = $questions;
+        $ans->is_correct = true;
+        $ans->bengali_meaning = $bengali_meaning;
+        $ans->save();
         //return redirect()->back();
     }
 

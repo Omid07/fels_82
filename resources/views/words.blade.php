@@ -77,20 +77,16 @@
                 </tr>
             </thead>
             <tbody>
-            @foreach ($words as $word)
+            @foreach ($words as $index=>$word)
             <tr>
-                <td>{{ $word->english_word }}
+                <td>{{ $questionCorrespondingToanswere[$index] }}
                 </td>
                 <td>
-                    {!! Form::open(['route'=>['admins_question.edit', $word->id], 'method' => 'GET']) !!}
+                    {!! Form::open(['route'=>['admins_question.edit', $questionCorrespondingToanswere->id], 'method' => 'GET']) !!}
                         {!! Form::submit('Edit') !!}
                     {!! Form:: close() !!}
                 </td>
-                @foreach ($meanings as $meaning)
-                    @if ($word->id == $meaning->id)
-                        <td>{{ $meaning->bengali_meaning }}</td>
-                    @endif
-                @endforeach
+                <td>{{ $meanings[index] }}</td>
                 <td>
                 {!! Form::open(['route'=>['admins_answer.edit', $meaning->id], 'method' => 'GET']) !!}
                     {!! Form::submit('Edit') !!}

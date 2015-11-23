@@ -18,9 +18,13 @@ class WordsController extends Controller
      */
     public function index()
     {
-        $words = Question::all();
-        $meanings = Answer::all();
-        return view('words', compact('words', 'meanings'));
+        $words = Answer::with('question_id');
+        $questionCorrespondingToanswere = Question::WhereId($words)->lists('english_word');
+        // $meanings = Answer::all();
+                $meanings=Answer:: WhereIn('question_id', $questionCorrespondingToanswere)
+                ->where('is_correct', '=', true)
+                ->lists('bengali_meaning');
+        return view('words', compact('questionCorrespondingToanswere','words', 'meanings'));
     }
 
     /**

@@ -28,7 +28,11 @@
                     <li>{!! HTML::link('words', 'Words') !!}
                     </li>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#"><span class="glyphicon glyphicon-search"></span> Search</a>
+                        <li>
+                            {!! Form::open(['route'=>'admins.index','method'=>'GET','class'=>'form-horizen']) !!}
+                            {!! Form::text('name') !!}
+                            {!! Form::submit() !!}
+                            {!! Form::close() !!}
                         </li>
                         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Actions <span class="caret"></span></a>
                             <ul class="dropdown-menu">
